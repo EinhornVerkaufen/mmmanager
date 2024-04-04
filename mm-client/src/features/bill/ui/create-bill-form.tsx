@@ -41,19 +41,26 @@ const CreateBillForm: FC<{
   };
 
   const onSubmit = async (): Promise<void> => {
-    const result = createBill(String(values.title), Number(values.balance));
+    const result = await createBill(
+      String(values.title), 
+      Number(values.balance)
+      );
     if (result) {
       onClose();
     }
   };
 
-  const { values, errors, handleChange, handleSubmit } = useForm(
+  const { values, errors, handleChange, handleSubmit, setFormValues } = useForm(
     initialValues,
     validationRules,
     onSubmit,
   );
 
   const isLoading = status === "loading";
+
+  useEffect(() => {
+    setFormValues(initialValues);
+  }, [bills]);
 
   return (
     <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
@@ -70,6 +77,7 @@ const CreateBillForm: FC<{
                 value={values.title}
                 onChange={handleChange}
                 ref={initialRef}
+                maxLenght={30}
                 placeholder="Название"
               />
               <FormErrorMessage>{errors.title}</FormErrorMessage>
@@ -86,6 +94,7 @@ const CreateBillForm: FC<{
                 name={"balance"}
                 precision={2}
                 step={500}
+                max={999_999_999_999}
               >
                 <NumberInputField />
                 <NumberInputStepper>

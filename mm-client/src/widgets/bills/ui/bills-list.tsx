@@ -24,6 +24,7 @@ const BillsList: FC = observer(() => {
   useEffect(() => {
     fetchBills();
   }, []);
+
   if (isLoading)
     return (
       <SimpleGrid py={4} columns={3} gap={6} justifyItems={"stretch"}>
@@ -32,6 +33,7 @@ const BillsList: FC = observer(() => {
         ))}
       </SimpleGrid>
     );
+
   return (
     <Box
       overflowY={"auto"}
@@ -43,24 +45,26 @@ const BillsList: FC = observer(() => {
         {bills.map((item, index) => (
           <BillCard key={item.id} {...item} index={index} />
         ))}
-        <BillCard index={bills.length + 1}>
-          <Card
-            onClick={onOpen}
-            _hover={{ bg: "gray.600" }}
-            _active={{ bg: "gray.500" }}
-            transition={"all 0.2s"}
-            h={"100%"}
-            cursor={"pointer"}
-          >
-             <CardBody
-              justifyContent={"center"}
-              alignItems={"center"}
-              display={"flex"}
+        {bills.length < 6 && (
+          <BillCard index={bills.length + 1}>
+            <Card
+              onClick={onOpen}
+              _hover={{ bg: "gray.600" }}
+              _active={{ bg: "gray.500" }}
+              transition={"all 0.2s"}
+              h={"100%"}
+              cursor={"pointer"}
             >
-              <Icon as={FaPlus} w={5} h={5} />
-            </CardBody>
-          </Card>
-        </BillCard>
+              <CardBody
+                justifyContent={"center"}
+                alignItems={"center"}
+                display={"flex"}
+              >
+                <Icon as={FaPlus} w={5} h={5} />
+              </CardBody>
+            </Card>
+          </BillCard>
+        )}
         <CreateBillForm onClose={onClose} isOpen={isOpen} />
       </SimpleGrid>
     </Box>

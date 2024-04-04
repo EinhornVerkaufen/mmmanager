@@ -1,14 +1,13 @@
-import { Box } from "@chakra-ui/react";
 import { type FC } from "react";
-import { Loader } from "~/shared/ui";
+import { PageAnim } from "~/shared/ui";
 import { BillsList, MainHeader } from "~/widgets";
 
 const Main: FC = () => {
   return (
-    <Box>
+    <PageAnim>
       <MainHeader/>
       <BillsList/>
-    </Box>
+    </PageAnim>
   );
 };
 
