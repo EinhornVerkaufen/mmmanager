@@ -26,6 +26,15 @@ class BillsModule {
   setBills = (bills: IBill[]): void => {
     this.bills = bills;
   };
+  
+  changeBillBalance = (id: number, balance: number): void => {
+    this.bills = this.bills.map((bill) => {
+      if (bill.id === id) {
+        return { ...bill, balance };
+      }
+      return bill;
+    });
+  };
 
   fetchBills = async (): Promise<void> => {
     try {

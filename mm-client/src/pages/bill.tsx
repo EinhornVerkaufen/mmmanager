@@ -21,19 +21,22 @@ const Bill: FC = observer(() => {
   }, []);
 
   return (
-    <PageAnim>
-      <Flex flexDirection={"column"} gap={4}>
-        <BillHeader />
-        <BillBalance />
-        <BillStat setType={setType} onOpen={onOpen} />
-        <CreateRecordForm
-          billId={bill?.id}
-          isOpen={isOpen}
-          onClose={onClose}
-          type={type}
-        />
-      </Flex>
-    </PageAnim>
+    <ScrollPAgeLayout>
+      <PageAnim>
+        <Flex flexDirection={"column"} gap={4}>
+          <BillHeader />
+          <BillBalance />
+          <BillStat setType={setType} onOpen={onOpen} />
+          <RecordsList billId={bill?.id} />
+          <CreateRecordForm
+            billId={bill?.id}
+            isOpen={isOpen}
+            onClose={onClose}
+            type={type}
+          />
+        </Flex>
+      </PageAnim>
+    </ScrollPageLayout>
   );
 });
 
