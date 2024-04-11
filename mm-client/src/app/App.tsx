@@ -10,7 +10,6 @@ import "./styles/globals.css";
 const App: FC = observer(() => {
   return (
     <ChakraUiProvider>
-      
       <Suspense
         fallback={
           <Flex h={"100vh"} justifyContent={"center"} alignItems={"center"}>
@@ -20,7 +19,6 @@ const App: FC = observer(() => {
       >
         <RouterProvider router={router} />
       </Suspense>
-      
     </ChakraUiProvider>
   );
 });

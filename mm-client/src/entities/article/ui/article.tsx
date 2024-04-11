@@ -9,20 +9,25 @@ const Article: FC<{
   index: number;
   onClick?: (id: number) => void;
   selected?: boolean;
-}> = ({ item, index, onClick, selected }) => {
+  disabled?: boolean;
+}> = ({ item, index, onClick, selected, disabled }) => {
   const controls = useAnimation();
 
-  const initialState = { opacity: 0.5, scale: 0 };
+  const initialState = disabled
+    ? { opacity: 1, scale: 1 }
+    : { opacity: 0.5, scale: 0 };
 
   useEffect(() => {
-    controls.start({
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.2,
-        delay: index < 10 ? index * 0.02 : 10 * 0.02,
-      },
-    });
+    if (!disabled) {
+      controls.start({
+        opacity: 1,
+        scale: 1,
+        transition: {
+          duration: 0.2,
+          delay: index < 10 ? index * 0.02 : 10 * 0.02,
+        },
+      });
+    }
   }, []);
 
   return (
@@ -34,13 +39,13 @@ const Article: FC<{
           }
         }}
         key={item.id}
-        _hover={{ bgColor: item.color.split(".")[0] + ".400" }}
+        _hover={{ bgColor: !disabled && item.color.split(".")[0] + ".400" }}
         flexDirection={"column"}
         justifyContent={"center"}
         alignItems={"center"}
         bgColor={selected ? item.color.split(".")[0] + ".300" : item.color}
         borderRadius={"full"}
-        cursor={"pointer"}
+        cursor={!disabled && "pointer"}
         transition={"all 0.2s"}
         w={"100%"}
         h={"80px"}

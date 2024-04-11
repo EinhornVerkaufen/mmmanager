@@ -17,5 +17,4 @@ export const initVK = async (): Promise<void> => {
   } catch (e) {
     setIsAuth(false);
   }
-  
 };

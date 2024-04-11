@@ -32,15 +32,30 @@ class RecordsModule {
     this.status = status;
   };
 
-  fetchRecords = async (billId: number): Promise<void> => {
+  addRecords = (records: IRecord[]): void => {
+    this.records = this.records.concat(records);
+  };
+
+  fetchRecords = async (
+    page: number = 1,
+    limit: number = 10,
+    billId: number,
+  ): Promise<IRecord[]> => {
     try {
-      this.setStatus("loading");
-      const res = await api.get<IRecord[]>(`/records/${billId}`);
-      this.records = res.data;
+      const res = await api.get<IRecord[]>(
+        `/records/${billId}?page=${page}&limit=${limit}`,
+      );
+      this.addRecords(res.data);
       this.setStatus("success");
+      return res.data;
     } catch (e) {
       this.setStatus("error");
     }
+  };
+
+  reset = (): void => {
+    this.records = [];
+    this.status = "idle";
   };
 
   createRecord = async (data: {
@@ -52,10 +67,10 @@ class RecordsModule {
     date: string;
   }): Promise<boolean> => {
     try {
-      const res = await api.post<IRecord>("/records", data);
-      this.records = [...this.records, res.data];
       const bill = BillModule;
       const bills = BillsModule;
+      const res = await api.post<IRecord>("/records", data);
+      this.records = [res.data, ...this.records];
       const newBalance =
         bill.bill.balance + data.amount * (data.type_id === 1 ? 1 : -1);
       bill.changeBalance(data.amount * (data.type_id === 1 ? 1 : -1));
