@@ -58,6 +58,7 @@ class RecordsModule {
     this.status = "idle";
   };
 
+  @action
   createRecord = async (data: {
     type_id: number;
     amount: number;

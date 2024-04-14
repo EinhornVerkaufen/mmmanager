@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import { RecordsModule } from "~/widgets";
 import { Flex, Skeleton } from "@chakra-ui/react";
 import { RecordCard } from "~/features";
+import { BillModule } from "~/widgets/bills/model";
 
 const RecordsList: FC<{ billId?: number }> = observer(({ billId }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -10,6 +11,7 @@ const RecordsList: FC<{ billId?: number }> = observer(({ billId }) => {
   const [fetching, setFetching] = useState<boolean>(true);
 
   const { records, fetchRecords, status, reset } = RecordsModule;
+  const { reset: billReset } = BillModule;
 
   const isLoading = status === "loading";
 
