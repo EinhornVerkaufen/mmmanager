@@ -10,13 +10,14 @@ const RecordsList: FC<{ billId?: number }> = observer(({ billId }) => {
   const [isMore, setIsMore] = useState<boolean>(true);
   const [fetching, setFetching] = useState<boolean>(true);
 
-  const { records, fetchRecords, status, reset } = RecordsModule;
+  const { records, fetchRecords, status, reset: recordsReset } = RecordsModule;
   const { reset: billReset } = BillModule;
 
   const isLoading = status === "loading";
 
   const handleReset = (): void => {
-    reset();
+    recordsReset();
+    billReset();
     setCurrentPage(1);
     setIsMore(true);
     setFetching(false);
