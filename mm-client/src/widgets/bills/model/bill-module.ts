@@ -3,11 +3,6 @@ import { type IBill } from "~/widgets/bills/model/bills-module";
 import { type StatusType } from "~/shared/model/status-type";
 import { api } from "~/shared/api/api";
 
-type BillWithStat = IBill & {
-  total_income: number;
-  total_expense: number;
-};
-
 class BillModule {
   constructor() {
     makeAutoObservable(this);

@@ -13,9 +13,9 @@ import {
 } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa";
 import { CurrencyFormatter } from "~/shared/ui";
-import { type ArticleType } from "~/entities/article/model/article";
 import { BillModule } from "~/widgets/bills/model";
 import { observer } from "mobx-react-lite";
+import { type ArticleType } from "~/shared/api/services/articles";
 
 const BillStat: FC<{
   setType: (type: ArticleType) => void;
@@ -34,7 +34,10 @@ const BillStat: FC<{
 
   return (
     <Card>
-      <Stack direction={"row"} divider={<StackDivider />}>
+      <Stack
+        direction={{ m300: "column", m500: "row" }}
+        divider={<StackDivider />}
+      >
         <Flex flex={"1"} flexDirection={"column"} alignItems={"center"}>
           <CardBody
             display={"flex"}

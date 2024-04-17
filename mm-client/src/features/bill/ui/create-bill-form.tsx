@@ -1,4 +1,4 @@
-import { type ChangeEvent, type FC, useRef } from "react";
+import { type ChangeEvent, type FC, useEffect, useRef } from "react";
 import {
   Button,
   FormControl,
@@ -42,9 +42,9 @@ const CreateBillForm: FC<{
 
   const onSubmit = async (): Promise<void> => {
     const result = await createBill(
-      String(values.title), 
-      Number(values.balance)
-      );
+      String(values.title),
+      Number(values.balance),
+    );
     if (result) {
       onClose();
     }
@@ -77,7 +77,7 @@ const CreateBillForm: FC<{
                 value={values.title}
                 onChange={handleChange}
                 ref={initialRef}
-                maxLenght={30}
+                maxLength={30}
                 placeholder="Название"
               />
               <FormErrorMessage>{errors.title}</FormErrorMessage>

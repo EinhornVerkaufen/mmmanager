@@ -18,12 +18,12 @@ import {
   NumberInputStepper,
   Textarea,
 } from "@chakra-ui/react";
-import { type ArticleType } from "~/entities/article/model/article";
 import { ArticlesList, RecordDatePicker } from "~/features";
 import useForm from "~/shared/lib/form-validate";
 import { DateTime } from "luxon";
 import { RecordsModule } from "~/widgets";
 import { observer } from "mobx-react-lite";
+import { type ArticleType } from "~/shared/api/services/articles";
 
 const CreateRecordForm: FC<{
   isOpen: boolean;
@@ -118,6 +118,8 @@ const CreateRecordForm: FC<{
                     } as ChangeEvent<HTMLInputElement>);
                   }}
                   maxLength={500}
+                  height={"300px"}
+                  resize={"none"}
                   value={values.description}
                   name={"description"}
                   placeholder={"Описание"}
@@ -152,7 +154,7 @@ const CreateRecordForm: FC<{
                 <Button colorScheme={"blue"} mr={3} type={"submit"}>
                   Создать
                 </Button>
-                <Button>Отмена</Button>
+                <Button onClick={onClose}>Отмена</Button>
               </FormControl>
             </Flex>
           </form>

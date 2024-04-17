@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import { type FC, useState } from "react";
 import { PageAnim } from "~/shared/ui";
 import { Flex } from "@chakra-ui/react";
 import { BillSelect, CardSelect, StatisticsHeader } from "~/widgets";
@@ -13,7 +13,7 @@ const Statistics: FC = () => {
   const [activeType, setActiveType] = useState<number>(0);
   return (
     <PageAnim>
-      <Flex flexDirection={"column"} gap={4}>
+      <Flex flexDirection={"column"} gap={3}>
         <StatisticsHeader />
         <BillSelect onChange={setCurrentBillId} value={currentBillId} />
         <CardSelect
